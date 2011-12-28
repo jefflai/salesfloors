@@ -11,8 +11,7 @@ public class TrainFaces {
 	public static final String apiSecret = "de832406e48d700fd97956f98f800153"; 
 	public static final String desiredUserIds = "1224055"; // Jeff
 										 		//"517172868"; // Derek
-	// this is not the correct oauth token
-	public static final String oauthToken = "AQBZSs3TSmbAW72slm8IzrqO3v5jYMvNCmT9D326GuH0Ws5xEj4GrnYEuwP63jFAD_Knn63KU_1r8VB5KzdZol12-ZzCxnTGUJm58d6VY75710mbZgrOwCkpV9L62E0aHWv6UwIDGGqmYafm0IYJiNvnrpb7iJnaXYjR_oMHHsz_v0Fj0gMqGgG3GFzFojMbWzM";
+	public static final String oauthToken = "AAADMH1YfpJwBAPc4qjpetktqlJCQDqeWLhLLOypc8NgLY2hZCWRsPZCmgIYErbIfWIVZAPOgZBitQL5TVFO2FWgXcfCsBxRSUxqP1nhoTQZDZD";
 	
 	public static final String nameSpace = "facebook.com";
 	public static final String userAuth = "fb_user:517172868,fb_oauth_token:" + oauthToken;
