@@ -8,16 +8,23 @@ import org.eclipse.jetty.servlet.*;
 
 public class HelloWorld extends HttpServlet {
 
+	boolean postReceived = false;
+	String postData;
+	
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         resp.getWriter().print("Hello from Java GET request!\n");
+        if(postReceived)
+        	resp.getWriter().print("the response is: " + postData);
     }
     
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         resp.getWriter().print("POST received!\n");
+        postReceived = true;
+        postData = resp.toString();
     }
 
     public static void main(String[] args) throws Exception{
