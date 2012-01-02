@@ -126,7 +126,7 @@
 		                  <assembleDirectory>target</assembleDirectory>
 		                  <programs>
 		                      <program>
-		                          <mainClass>com.salesfloors.client.HelloWorld</mainClass>
+		                          <mainClass>com.salesfloors.client.TrainFaces</mainClass>
 		                          <name>webapp</name>
 		                      </program>
 		                  </programs>
