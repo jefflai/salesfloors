@@ -16,7 +16,8 @@ public class FacesController {
 		ModelAndView mav = new ModelAndView();
     	mav.addObject("oauth_token", oauthToken);    	
     	TrainFaces.oauthToken = oauthToken;
-    	TrainFaces.trainFace(TrainFaces.desiredUserIds);		
+    	TrainFaces.trainFace(TrainFaces.desiredUserIds);	
+    	mav.setViewName("fb_oauth_success");
     	return mav;
     }
 }

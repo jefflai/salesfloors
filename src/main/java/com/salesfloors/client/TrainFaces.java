@@ -30,9 +30,7 @@ public class TrainFaces {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		getFbOauth();
-		System.out.println("new oauth token:" + oauthToken);
-		
+		getFbOauth();		
 	}
 	
 	private static void getFbOauth() {
