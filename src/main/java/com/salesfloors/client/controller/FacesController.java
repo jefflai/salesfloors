@@ -8,9 +8,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.salesfloors.client.TrainFaces;
 
-@Controller
+//@Controller
 public class FacesController {
-	@RequestMapping(value = "/faces/fb_oauth", method = RequestMethod.POST)
+//	@RequestMapping(value = "/faces/fb_oauth", method = RequestMethod.POST)
     public ModelAndView getOauthToken(@RequestParam(value="access_token") String oauthToken)
     {
 		ModelAndView mav = new ModelAndView();
@@ -21,7 +21,7 @@ public class FacesController {
     	return mav;
     }
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+//	@RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView callFB()
     {
 		ModelAndView mav = new ModelAndView();
