@@ -14,7 +14,11 @@
   </parent>
 
   <dependencies>
-
+    <dependency>
+      <groupId>com.salesfloors</groupId>
+      <artifactId>salesfloors-aws-client</artifactId>
+    </dependency>
+    
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
@@ -67,7 +71,10 @@
       <artifactId>spring-social-facebook</artifactId>
     </dependency>
 
-
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
     <dependency>
       <groupId>commons-net</groupId>
       <artifactId>commons-net</artifactId>

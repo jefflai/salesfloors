@@ -27,8 +27,12 @@ public class AwsClient {
     }
     
     public void uploadFileToS3(File file) throws AmazonServiceException, AmazonClientException, FileNotFoundException, InterruptedException {
+    	uploadFileToS3(file, CannedAccessControlList.PublicRead);
+    }
+    
+    public void uploadFileToS3(File file, CannedAccessControlList controlList) {
     	PutObjectRequest por = new PutObjectRequest(bucketName, file.getName(), file);
-    	por.setCannedAcl(CannedAccessControlList.PublicRead);
+    	por.setCannedAcl(controlList);
     	s3.putObject(por);
     }
     
