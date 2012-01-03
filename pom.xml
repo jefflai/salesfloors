@@ -10,7 +10,9 @@
   <name>salesfloors-parent</name>
   
   <modules>
+    <module>aws-client</module>
   <module>webapp</module>
+    <module>uploader</module>
   </modules>
   
     <properties>

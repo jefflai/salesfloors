@@ -2,17 +2,15 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.salesfloors</groupId>
   <artifactId>salesfloors-webapp</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>salesfloors-webapp</name>
-  
+
   <parent>
     <groupId>com.salesfloors</groupId>
-  <artifactId>salesfloors-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+    <artifactId>salesfloors-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
 
   <dependencies>
@@ -74,15 +72,8 @@
       <groupId>commons-net</groupId>
       <artifactId>commons-net</artifactId>
     </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-    </dependency>
 
-    <dependency>
-      <groupId>com.amazonaws</groupId>
-      <artifactId>aws-java-sdk</artifactId>
-    </dependency>
+
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-servlet</artifactId>
@@ -99,14 +90,11 @@
       <groupId>org.mortbay.jetty</groupId>
       <artifactId>jsp-2.1-glassfish</artifactId>
     </dependency>
-     <dependency>
-	      <groupId>com.force.sdk</groupId>
-	      <artifactId>force-connector</artifactId>
-	  </dependency>
-	  <dependency>
-	      <groupId>org.quartz-scheduler</groupId>
-	      <artifactId>quartz</artifactId>
- 		</dependency>
+    <dependency>
+      <groupId>com.force.sdk</groupId>
+      <artifactId>force-connector</artifactId>
+    </dependency>
+
 
     <dependency>
       <groupId>com.force.sdk</groupId>
@@ -130,7 +118,7 @@
 
   <build>
     <defaultGoal>install</defaultGoal>
-<plugins>
+    <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>appassembler-maven-plugin</artifactId>

@@ -19,7 +19,7 @@ public class AwsClient {
     private AmazonS3 s3;
 
     public AwsClient() throws IOException {
-        s3 = new AmazonS3Client(new PropertiesCredentials(this.getClass().getClassLoader().getResourceAsStream("application.properties")));
+        s3 = new AmazonS3Client(new PropertiesCredentials(this.getClass().getClassLoader().getResourceAsStream("aws.properties")));
     }
     
     public AmazonS3 getS3() {
