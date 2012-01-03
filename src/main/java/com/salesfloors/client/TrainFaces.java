@@ -30,10 +30,10 @@ public class TrainFaces {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		getFbOauth();		
+		//getFbOauth();		
 	}
 	
-	private static void getFbOauth() {
+	public static void getFbOauth() {
 		Map<String,String> vars = new HashMap<String,String>();
 		vars.put("fbClientId", fbClientId);
 		vars.put("fbRedirectUri", fbRedirectUri);
