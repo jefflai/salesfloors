@@ -93,6 +93,11 @@
 	      <artifactId>force-connector</artifactId>
 	      <version>${force.sdk.version}</version>
 	  </dependency>
+	  <dependency>
+	      <groupId>org.quartz-scheduler</groupId>
+	      <artifactId>quartz</artifactId>
+	      <version>2.0.1</version>
+ 		</dependency>
   </dependencies>
   
 
