@@ -9,8 +9,8 @@ public class TrainFaces {
 
 	public static String oauthToken = "AAADMH1YfpJwBAMNUYyNSefXE2kL2HkMhomBZAtmFOEbUi0eQsaZBDE2vP4yIeVeY5YRpOuIz94ZCx33MtRQPzDIlPbMlz8F3wALuXSEowZDZD";
 	
-	public static final String apiKey = "eed2f515182570f4617551a8a7827188"; 
-	public static final String apiSecret = "de832406e48d700fd97956f98f800153"; 
+	public static final String faceDotComApiKey = "eed2f515182570f4617551a8a7827188"; 
+	public static final String faceDotComApiSecret = "de832406e48d700fd97956f98f800153"; 
 	public static final String desiredUserIds = //"1224055"; // Jeff
 										 		"517172868"; // Derek
 	public static final String callbackUrl = "http://gentle-samurai-2258.herokuapp.com/";
@@ -44,8 +44,8 @@ public class TrainFaces {
  
 	public static void trainFace(String userIds) {
 		Map<String,String> vars = new HashMap<String,String>();
-		vars.put("apiKey", apiKey);
-		vars.put("apiSecret", apiSecret);
+		vars.put("apiKey", faceDotComApiKey);
+		vars.put("apiSecret", faceDotComApiSecret);
 		vars.put("userIds", userIds);
 		vars.put("nameSpace", nameSpace);
 		vars.put("userAuth", userAuth);
