@@ -25,7 +25,7 @@ public class AwsClient {
         return s3;
     }
     
-    public void uploadFileToS3(String objNamePrefix, File file) throws AmazonServiceException, AmazonClientException, FileNotFoundException, InterruptedException {
+    public void uploadFileToS3(File file) throws AmazonServiceException, AmazonClientException, FileNotFoundException, InterruptedException {
     	s3.putObject(new PutObjectRequest(bucketName, file.getName(), file));
     }
 

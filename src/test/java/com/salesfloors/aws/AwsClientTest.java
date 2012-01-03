@@ -15,7 +15,6 @@ import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.GetObjectRequest;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 
 public class AwsClientTest {
@@ -31,8 +30,6 @@ public class AwsClientTest {
 		// upload test file to s3
 		String testFileName = "simple.txt";
 		File fileToUpload = FileUtils.toFile(this.getClass().getClassLoader().getResource(testFileName));
-		String testKey = "testfile";
-		
 		
 		String buckets = "";
 		System.out.println("Listing buckets");
@@ -43,9 +40,10 @@ public class AwsClientTest {
 		Assert.assertTrue(buckets.contains(AwsClient.bucketName));        
         
 		System.out.println("Uploading a new object to S3 from a file\n");
-        aws.getS3().putObject(new PutObjectRequest(AwsClient.bucketName, testKey, fileToUpload));
+		aws.uploadFileToS3(fileToUpload);
+		
 		// download from s3
-		S3Object obj = aws.getS3().getObject(new GetObjectRequest(AwsClient.bucketName, testKey));
+		S3Object obj = aws.getS3().getObject(new GetObjectRequest(AwsClient.bucketName, testFileName));
 		// verify downloaded contents
 		InputStream objInputStream = null;
 		List<String> lines = null;
@@ -59,7 +57,7 @@ public class AwsClientTest {
 		Assert.assertEquals(lines.size(), 1);
 		Assert.assertEquals(lines.get(0), "Hello");
 		// delete from s3
-		aws.getS3().deleteObject(AwsClient.bucketName, testKey);
+		aws.getS3().deleteObject(AwsClient.bucketName, testFileName);
 	}
 	
 }
