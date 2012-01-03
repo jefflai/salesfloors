@@ -36,7 +36,7 @@ public class AwsClientTest {
 	@Test
 	public void testUpload() throws AmazonServiceException, AmazonClientException, InterruptedException, IOException {
 		// upload test file to s3
-		/*String testFileName = "simple.txt";
+		String testFileName = "simple.txt";
 		File fileToUplaod = FileUtils.toFile(this.getClass().getClassLoader().getResource(testFileName));
 		String testPrefix = "test";
 		aws.uploadFileToS3(testPrefix, fileToUplaod);
@@ -56,7 +56,7 @@ public class AwsClientTest {
 		Assert.assertEquals(lines.size(), "1");
 		Assert.assertEquals(lines.get(0), "Hello");
 		// delete from s3
-		aws.getS3().deleteObject(aws.getConfig().getBucket(), fullObjName);*/
+		aws.getS3().deleteObject(aws.getConfig().getBucket(), fullObjName);
 	}
 	
 }

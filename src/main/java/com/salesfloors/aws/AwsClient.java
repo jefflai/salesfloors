@@ -40,10 +40,12 @@ public class AwsClient {
     public void uploadFileToS3(String objNamePrefix, File file) throws AmazonServiceException, AmazonClientException, FileNotFoundException, InterruptedException {
     	// aws object name
     	String objName = objNamePrefix + "/" + file.getName();
-    	ObjectMetadata md = new ObjectMetadata();
-    	md.setContentLength(file.getTotalSpace());
-    	Upload upload = getTransferManager().upload(getConfig().getBucket(), objName,
-                new FileInputStream(file), md);
+//    	ObjectMetadata md = new ObjectMetadata();
+//    	md.setContentLength(file.getTotalSpace());
+//    	md.setContentType("UTF-8");
+//    	Upload upload = getTransferManager().upload(getConfig().getBucket(), objName,
+//                new FileInputStream(file), md);
+    	Upload upload = getTransferManager().upload(getConfig().getBucket(), objName, file);
     	upload.waitForCompletion();
     }
 
