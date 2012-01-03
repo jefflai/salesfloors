@@ -20,4 +20,14 @@ public class FacesController {
     	mav.setViewName("fb_oauth_success");
     	return mav;
     }
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView callFB()
+    {
+		ModelAndView mav = new ModelAndView();
+    	TrainFaces.getFbOauth();
+    	mav.addObject("oauth_token", "hello");    	
+    	mav.setViewName("fb_oauth_success");
+    	return mav;
+    }
 }
