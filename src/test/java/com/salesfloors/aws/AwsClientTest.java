@@ -57,7 +57,7 @@ public class AwsClientTest {
 		Assert.assertEquals(lines.size(), 1);
 		Assert.assertEquals(lines.get(0), "Hello");
 		// delete from s3
-		aws.getS3().deleteObject(AwsClient.bucketName, testFileName);
+		aws.deleteFileOnS3(testFileName);
 	}
 	
 }

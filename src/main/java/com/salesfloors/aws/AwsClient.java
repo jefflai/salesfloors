@@ -9,6 +9,7 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 public class AwsClient {
@@ -26,7 +27,12 @@ public class AwsClient {
     }
     
     public void uploadFileToS3(File file) throws AmazonServiceException, AmazonClientException, FileNotFoundException, InterruptedException {
-    	s3.putObject(new PutObjectRequest(bucketName, file.getName(), file));
+    	PutObjectRequest por = new PutObjectRequest(bucketName, file.getName(), file);
+    	por.setCannedAcl(CannedAccessControlList.PublicRead);
+    	s3.putObject(por);
     }
-
+    
+    public void deleteFileOnS3(String fileName) throws AmazonServiceException, AmazonClientException, FileNotFoundException, InterruptedException {
+    	s3.deleteObject(bucketName, fileName);
+    }
 }
