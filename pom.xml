@@ -15,6 +15,7 @@
     <java.compile.version>1.6</java.compile.version>
 	<spring.version>3.1.0.RELEASE</spring.version>
 	<jetty.version>7.4.4.v20110707</jetty.version>
+   <force.sdk.version>22.0.7-BETA</force.sdk.version>
   </properties>
 
   <dependencies>
@@ -87,9 +88,13 @@
       <artifactId>jsp-2.1-glassfish</artifactId>
       <version>2.1.v20100127</version>
     </dependency>
-    
-
+     <dependency>
+	      <groupId>com.force.sdk</groupId>
+	      <artifactId>force-connector</artifactId>
+	      <version>${force.sdk.version}</version>
+	  </dependency>
   </dependencies>
+  
 
   <build>
     <defaultGoal>install</defaultGoal>
