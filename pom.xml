@@ -11,6 +11,7 @@
 
   <modules>
     <module>aws-client</module>
+    <module>sfdc-client</module>
     <module>webapp</module>
     <module>uploader</module>
     <module>salesfloors-recognizer</module>
