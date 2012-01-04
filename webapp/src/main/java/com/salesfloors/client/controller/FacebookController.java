@@ -23,7 +23,7 @@ import com.salesfloors.aws.AwsClient;
 @Controller
 public class FacebookController {
 	
-	private static final String fbTokenBucket = "FacebookToken";
+	public static final String fbTokenBucket = "FacebookToken";
 	
 	@Inject
 	private ConnectionRepository connectionRepository;
