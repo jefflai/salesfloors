@@ -16,7 +16,7 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.S3Object;
 
-public class AwsClientTest {
+public class AwsClientS3Test {
 	private AwsClient aws;
 	
 	@BeforeClass

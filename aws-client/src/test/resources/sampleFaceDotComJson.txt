@@ -1,0 +1,75 @@
+{
+    no_training_set: [
+        {
+            uid: "899195206@facebook.com",
+            training_set_size: 0,
+            last_trained: 0,
+            training_in_progress: false
+        },
+        {
+            uid: "711413@facebook.com",
+            training_set_size: 0,
+            last_trained: 0,
+            training_in_progress: false
+        },
+        {
+            uid: "565267163@facebook.com",
+            training_set_size: 0,
+            last_trained: 0,
+            training_in_progress: false
+        }
+    ],
+    unchanged: [
+        {
+            uid: "905570720@facebook.com",
+            training_set_size: 18,
+            last_trained: 1267098123,
+            training_in_progress: false
+        },
+        {
+            uid: "1066302268@facebook.com",
+            training_set_size: 17,
+            last_trained: 1267639090,
+            training_in_progress: false
+        },
+        {
+            uid: "1066813337@facebook.com",
+            training_set_size: 2,
+            last_trained: 1267639089,
+            training_in_progress: false
+        },
+        {
+            uid: "575363003@facebook.com",
+            training_set_size: 4,
+            last_trained: 1267865211,
+            training_in_progress: false
+        }
+    ],
+    updated: [
+        {
+            uid: "661810743@facebook.com",
+            training_set_size: 25,
+            last_trained: 1267865200,
+            training_in_progress: false
+        },
+        {
+            uid: "679769112@facebook.com",
+            training_set_size: 23,
+            last_trained: 1267865200,
+            training_in_progress: false
+        },
+        {
+            uid: "571876003@facebook.com",
+            training_set_size: 31,
+            last_trained: 1267865211,
+            training_in_progress: false
+        }
+    ],
+    status: "success",
+    usage: {
+        remaining: 200,
+        limit: 200,
+        reset_time_text: "Thu, 01 Jan 1970 00:00:00 +0000",
+        reset_time: null
+    }
+}
