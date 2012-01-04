@@ -10,9 +10,10 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.salesfloors.aws.AwsClient;
-import com.salesfloors.client.controller.FacebookController;
 
 public class TrainFaces {
+	public static final String fbTokenBucket = "FacebookToken";
+
 
 	public static final String faceDotComApiKey = "eed2f515182570f4617551a8a7827188"; 
 	public static final String faceDotComApiSecret = "de832406e48d700fd97956f98f800153"; 
@@ -47,7 +48,7 @@ public class TrainFaces {
 		InputStream objInputStream = null;
 		List<String> lines = null;
 		try {
-			objInputStream = aws.readFileFromS3("facebook_token", FacebookController.fbTokenBucket).getObjectContent();
+			objInputStream = aws.readFileFromS3("facebook_token", fbTokenBucket).getObjectContent();
 			lines = IOUtils.readLines(objInputStream);
 		} finally {
 			if (objInputStream != null) objInputStream.close();
@@ -71,13 +72,15 @@ public class TrainFaces {
 		System.out.println("here's your result: " + result);
 	}
 	
-	public String recognizeFaces(String photoUrl) {
+	public String recognizeFaces(String photoUrl) throws IOException {
 		Map<String,String> vars = new HashMap<String,String>();
 		vars.put("apiKey", faceDotComApiKey);
 		vars.put("apiSecret", faceDotComApiSecret);
 		vars.put("photoUrl", photoUrl);
 		vars.put("userIds", desiredUserIds);
 		vars.put("userAuth", userAuth);
+		
+		trainFaces();
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String result = restTemplate.getForObject(faceDotComRecognizeURL, String.class, vars);
@@ -97,6 +100,15 @@ public class TrainFaces {
 		
 		// for recognition
 		// tf.recognizeFaces("https://s3.amazonaws.com/FacePics/CustomerPhoto.tiff");
+	}
+	
+	private void trainFaces() throws IOException {
+		TrainFaces tf = new TrainFaces();
+		String[] fbIds = new String[] {TrainFaces.JEFFID, TrainFaces.DEREKID};
+		for (String id : fbIds) {
+			tf.trainFace(id);
+		}
+		
 	}
 
 }

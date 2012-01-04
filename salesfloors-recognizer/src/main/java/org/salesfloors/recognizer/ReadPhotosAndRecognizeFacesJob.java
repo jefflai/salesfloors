@@ -60,7 +60,13 @@ public class ReadPhotosAndRecognizeFacesJob implements Job {
 			S3Object photo = aws.readFileFromS3(obj.getKey());
 			
 			// call face.com api with photo
-			String recognitionResponse = tf.recognizeFaces(baseFacePhotoBucketUri + getAWSFilename(photo.getKey()));
+			String recognitionResponse = null;
+			try {
+				recognitionResponse = tf.recognizeFaces(baseFacePhotoBucketUri + getAWSFilename(photo.getKey()));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 			// parse response from face.com api	
 			String uid = null;
