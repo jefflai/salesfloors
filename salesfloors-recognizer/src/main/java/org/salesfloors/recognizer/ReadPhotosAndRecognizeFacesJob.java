@@ -24,7 +24,6 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.salesfloors.aws.AwsClient;
 import com.salesfloors.client.TrainFaces;
 import com.salesfloors.sfdc.SfdcConnector;
-import com.sforce.soap.partner.PartnerConnection;
 import com.sforce.ws.ConnectionException;
 
 /**

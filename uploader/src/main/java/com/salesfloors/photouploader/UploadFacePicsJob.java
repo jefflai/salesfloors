@@ -54,7 +54,7 @@ public class UploadFacePicsJob implements Job {
 					if(dirSize > 0) {
 						for(File photo : photos) {
 							try {
-								aws.uploadFileToS3(photo);
+								if(!photo.getName().startsWith(".")) aws.uploadFileToS3(photo);
 							} catch (AmazonServiceException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
