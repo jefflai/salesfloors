@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.model.Bucket;
-import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 
 public class AwsClientTest {
@@ -37,13 +36,13 @@ public class AwsClientTest {
         	buckets += bucket.getName();
             System.out.println(" - " + bucket.getName());
         }
-		Assert.assertTrue(buckets.contains(AwsClient.bucketName));        
+		Assert.assertTrue(buckets.contains(AwsClient.defaultBucketName));        
         
 		System.out.println("Uploading a new object to S3 from a file\n");
 		aws.uploadFileToS3(fileToUpload);
 		
 		// download from s3
-		S3Object obj = aws.getS3().getObject(new GetObjectRequest(AwsClient.bucketName, testFileName));
+		S3Object obj = aws.readFileFromS3(testFileName);
 		// verify downloaded contents
 		InputStream objInputStream = null;
 		List<String> lines = null;

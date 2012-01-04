@@ -1,4 +1,6 @@
-package com.salesfloors.photouploader;
+package org.salesfloors.recognizer;
+
+import java.io.IOException;
 
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -9,15 +11,24 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
-public class PhotoUploader {
+import com.salesfloors.aws.AwsClient;
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-	    try {
-	        JobDetail job = JobBuilder.newJob(UploadFacePicsJob.class)
+/**
+ * Face recognizer
+ *
+ */
+public class FaceRecognizer 
+{
+	AwsClient aws;
+	
+	public FaceRecognizer() throws IOException {
+		aws = new AwsClient();
+	}
+	
+    public static void main( String[] args )
+    {
+    	try {
+	        JobDetail job = JobBuilder.newJob(ReadPhotosAndRecognizeFacesJob.class)
 	        .withIdentity("batchJob", "batchGroup")
 	        .build();
 	    
@@ -34,8 +45,5 @@ public class PhotoUploader {
 	    } catch (SchedulerException e) {
 	        e.printStackTrace();
 	    }
-	    
-	}
-	
-	public PhotoUploader() {}
+    }
 }
