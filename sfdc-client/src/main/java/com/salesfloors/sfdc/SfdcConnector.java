@@ -13,13 +13,13 @@ public class SfdcConnector {
 	
 	private ForceServiceConnector serviceConn;
 	
-	public static final String isPresentField = "Is_Present__c";
+	public static final String isPresentField = "isPresent__c";
 	
 	public SfdcConnector() throws ConnectionException {
 		ForceConnectorConfig config = new ForceConnectorConfig();
-		config.setUsername("test@1325649127425.org");
-		config.setPassword("123456");
-		config.setAuthEndpoint("https://na1-aps1.t.salesforce.com/");
+		config.setUsername("dtia.face@salesforce.com");
+		config.setPassword("test1234");
+		config.setAuthEndpoint("https://na14.salesforce.com/");
 		serviceConn = new ForceServiceConnector(config);
 	}
 	

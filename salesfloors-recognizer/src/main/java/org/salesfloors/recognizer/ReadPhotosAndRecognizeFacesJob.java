@@ -1,5 +1,6 @@
 package org.salesfloors.recognizer;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -15,11 +16,16 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.web.client.RestTemplate;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.salesfloors.aws.AwsClient;
 import com.salesfloors.client.TrainFaces;
+import com.salesfloors.sfdc.SfdcConnector;
+import com.sforce.soap.partner.PartnerConnection;
+import com.sforce.ws.ConnectionException;
 
 /**
  * This class reads from AWS and calls face.com to recognize faces in the pictures
@@ -31,16 +37,19 @@ public class ReadPhotosAndRecognizeFacesJob implements Job {
 
 	public static final String baseFacePhotoBucketUri = "https://s3.amazonaws.com/FacePics/";
 	public static final String fbUserInfoURL = "https://graph.facebook.com/{userId}";
+	public static final int confidenceThreshold = 70;
 	
 	public AwsClient aws;
 	public ObjectMapper mapper;	
 	public TrainFaces tf;
+	public SfdcConnector sfdcConn;
 	
-	public ReadPhotosAndRecognizeFacesJob() throws IOException {
+	public ReadPhotosAndRecognizeFacesJob() throws IOException, ConnectionException {
 		aws = new AwsClient();	
 		mapper = new ObjectMapper();	
 		mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 		tf = new TrainFaces();		
+		sfdcConn = new SfdcConnector();
 	}
 		
 	@Override
@@ -64,12 +73,45 @@ public class ReadPhotosAndRecognizeFacesJob implements Job {
 				JsonNode firstPath = photosNode.path(0);				
 				JsonNode tagsNode = firstPath.get("tags");				
 				JsonNode uidsNode = tagsNode.path(0).get("uids");
-				JsonNode firstUidNode = uidsNode.path(0);
-				uid = firstUidNode.get("uid").getTextValue();
-				confidence = firstUidNode.get("confidence").getIntValue();
 				
-				System.out.println("uid: " + uid);
-				System.out.println("confidence: " + confidence);
+				if (uidsNode.size() > 0) {
+					JsonNode firstUidNode = uidsNode.path(0);
+					uid = firstUidNode.get("uid").getTextValue();
+					confidence = firstUidNode.get("confidence").getIntValue();
+					
+					System.out.println("uid: " + uid);
+					System.out.println("confidence: " + confidence);
+					
+					// get username from fb id
+					String userName = null;
+					try {
+						userName = getFbUsername(uid);				
+						System.out.println("your username: " + userName);
+					} catch (JsonParseException e) {
+						e.printStackTrace();
+					} catch (JsonMappingException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
+					// set is present only if confidence is greater than threshold
+					if(confidence > confidenceThreshold) {
+						// call sfdc api
+						SfdcConnector forceConn;
+						try {
+							String[] splitUserName = userName.split(" ");
+							String firstName = splitUserName[0];
+							String lastName = splitUserName[1];
+							
+							forceConn = new SfdcConnector(); 	
+					    	forceConn.setIsPresent(firstName, lastName, true);
+						} catch (ConnectionException e) {
+							e.printStackTrace();
+						}	    		    	
+					}
+				}
+				
 				
 			} catch (JsonParseException e) {
 				e.printStackTrace();
@@ -79,22 +121,20 @@ public class ReadPhotosAndRecognizeFacesJob implements Job {
 				e.printStackTrace();
 			}
 			
-			// get username from fb id
-			try {
-				String userName = getFbUsername(uid);
-				System.out.println("your username: " + userName);
-			} catch (JsonParseException e) {
-				e.printStackTrace();
-			} catch (JsonMappingException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			// call sfdc api
 			
 			
 			// delete file from S3
+			try {
+				aws.deleteFileOnS3(photo.getKey());
+			} catch (AmazonServiceException e) {
+				e.printStackTrace();
+			} catch (AmazonClientException e) {
+				e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -120,7 +160,7 @@ public class ReadPhotosAndRecognizeFacesJob implements Job {
 		return userId.substring(0, i);
 	}
 	
-	public static void main(String[] args) throws IOException, JobExecutionException {
+	public static void main(String[] args) throws IOException, JobExecutionException, ConnectionException {
 		ReadPhotosAndRecognizeFacesJob job = new ReadPhotosAndRecognizeFacesJob();
 		job.execute(null);
 	}
