@@ -1,3 +1,4 @@
+package com.salesfloors.sfdc;
 import junit.framework.Assert;
 
 import org.testng.annotations.BeforeClass;
