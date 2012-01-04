@@ -36,7 +36,7 @@ public class AwsClientS3Test {
         	buckets += bucket.getName();
             System.out.println(" - " + bucket.getName());
         }
-		Assert.assertTrue(buckets.contains(AwsClient.defaultBucketName));        
+		Assert.assertTrue(buckets.contains(AwsClient.bucketName));        
         
 		System.out.println("Uploading a new object to S3 from a file\n");
 		aws.uploadFileToS3(fileToUpload);

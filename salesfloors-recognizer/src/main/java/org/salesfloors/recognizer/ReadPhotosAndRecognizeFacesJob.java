@@ -31,7 +31,7 @@ public class ReadPhotosAndRecognizeFacesJob implements Job {
 		
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
-		ObjectListing ol = aws.getS3().listObjects(AwsClient.defaultBucketName);
+		ObjectListing ol = aws.getS3().listObjects(AwsClient.bucketName);
 		List<S3ObjectSummary> os = ol.getObjectSummaries();
 		
 		for(S3ObjectSummary obj : os) {
