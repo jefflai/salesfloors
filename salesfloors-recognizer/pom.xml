@@ -46,11 +46,7 @@
     <dependency>
       <groupId>com.salesfloors</groupId>
       <artifactId>salesfloors-sfdc-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.salesfloors</groupId>
-      <artifactId>salesfloors-webapp</artifactId>
-    </dependency>
+    </dependency>    
   </dependencies>
   
     <build>

@@ -1,4 +1,4 @@
-package com.salesfloors.client;
+package org.salesfloors.recognizer;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,8 +16,12 @@ public class TrainFaces {
 
 	public static final String faceDotComApiKey = "eed2f515182570f4617551a8a7827188"; 
 	public static final String faceDotComApiSecret = "de832406e48d700fd97956f98f800153"; 
-	public static final String desiredUserIds = "1224055@facebook.com," + // Jeff
-										 		"517172868@facebook.com"; // Derek
+	
+	public static final String JEFFID = "1224055@facebook.com";
+	public static final String DEREKID = "517172868@facebook.com";
+	
+	public static final String desiredUserIds = JEFFID + "," + DEREKID; 
+			
 	public static final String callbackUrl = "http://gentle-samurai-2258.herokuapp.com/";
 		
 	public static final String nameSpace = "facebook.com";
@@ -87,9 +91,12 @@ public class TrainFaces {
 	 */
 	public static void main(String[] args) throws IOException {
 		// only call this when training user id's
-		//trainFace(desiredUserIds);
+		
 		TrainFaces tf = new TrainFaces();
-		tf.recognizeFaces("https://s3.amazonaws.com/FacePics/CustomerPhoto.tiff");
+		tf.trainFace(JEFFID);
+		
+		// for recognition
+		// tf.recognizeFaces("https://s3.amazonaws.com/FacePics/CustomerPhoto.tiff");
 	}
 
 }
