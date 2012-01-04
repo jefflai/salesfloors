@@ -31,6 +31,7 @@ public class TrainFaces {
 	 */
 	public static void main(String[] args) {
 		//getFbOauth();		
+		trainFace(desiredUserIds);
 	}
 	
 	public static void getFbOauth() {

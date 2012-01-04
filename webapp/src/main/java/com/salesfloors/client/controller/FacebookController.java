@@ -23,6 +23,8 @@ import com.salesfloors.aws.AwsClient;
 @Controller
 public class FacebookController {
 	
+	private static final String fbTokenBucket = "FacebookToken";
+	
 	@Inject
 	private ConnectionRepository connectionRepository;
 
@@ -44,7 +46,7 @@ public class FacebookController {
 		AwsClient aws = new AwsClient();
 		File file = new File("target/facebook_token");
 		FileUtils.write(file, token);
-		aws.uploadFileToS3(file, CannedAccessControlList.Private);
+		aws.uploadFileToS3(file, CannedAccessControlList.Private, fbTokenBucket);
 	}
 	
 }

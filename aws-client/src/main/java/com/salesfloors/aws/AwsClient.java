@@ -16,6 +16,7 @@ import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.sqs.AmazonSQS;
@@ -57,14 +58,22 @@ public class AwsClient {
     	return uploadFileToS3(file, CannedAccessControlList.PublicRead);
     }
     
-    public PutObjectResult uploadFileToS3(File file, CannedAccessControlList controlList) {
+    public void uploadFileToS3(File file, CannedAccessControlList controlList) {
+    	uploadFileToS3(file, controlList, defaultBucketName);
+    }
+    
+    public void uploadFileToS3(File file, CannedAccessControlList controlList, String bucketName) {
     	PutObjectRequest por = new PutObjectRequest(bucketName, file.getName(), file);
     	por.setCannedAcl(controlList);
     	return s3.putObject(por);
     }
     
+    public S3Object readFileFromS3(String fileName) {
+    	return s3.getObject(new GetObjectRequest(defaultBucketName, fileName));
+    }
+    
     public void deleteFileOnS3(String fileName) throws AmazonServiceException, AmazonClientException, FileNotFoundException, InterruptedException {
-    	s3.deleteObject(bucketName, fileName);
+    	s3.deleteObject(defaultBucketName, fileName);
     }
     
     public SendMessageResult enqueueMessage(String msg) {
