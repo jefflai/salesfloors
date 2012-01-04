@@ -20,7 +20,7 @@ import com.salesfloors.aws.AwsClient;
 
 public class UploadFacePicsJob implements Job {
 
-	public static final String photoDirName = "/Users/dtia/Pictures/Automator Photos";
+	public static final String photoDirName = "/Users/jeffrey.lai/automator-photos";
 	public AwsClient aws = null;
 	
 	/**

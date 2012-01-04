@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.salesfloors</groupId>
@@ -44,21 +45,31 @@
         <version>6.3.1</version>
         <scope>test</scope>
       </dependency>
-      
-    <dependency>
-      <groupId>org.codehaus.jackson</groupId>
-      <artifactId>jackson-core-asl</artifactId>
-      <version>${jackson.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.jackson</groupId>
-      <artifactId>jackson-mapper-asl</artifactId>
-      <version>${jackson.version}</version>
-    </dependency>
+
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-core-asl</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-mapper-asl</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
 
       <dependency>
         <groupId>com.salesfloors</groupId>
         <artifactId>salesfloors-aws-client</artifactId>
+        <version>${salesfloors.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.salesfloors</groupId>
+        <artifactId>salesfloors-sfdc-client</artifactId>
+        <version>${salesfloors.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.salesfloors</groupId>
+        <artifactId>salesfloors-webapp</artifactId>
         <version>${salesfloors.version}</version>
       </dependency>
 
