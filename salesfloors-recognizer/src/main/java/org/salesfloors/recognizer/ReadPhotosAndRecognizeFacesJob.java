@@ -35,7 +35,7 @@ public class ReadPhotosAndRecognizeFacesJob implements Job {
 
 	public static final String baseFacePhotoBucketUri = "https://s3.amazonaws.com/FacePics/";
 	public static final String fbUserInfoURL = "https://graph.facebook.com/{userId}";
-	public static final int confidenceThreshold = 70;
+	public static final int confidenceThreshold = 50;
 	
 	public AwsClient aws;
 	public ObjectMapper mapper;	
@@ -153,7 +153,7 @@ public class ReadPhotosAndRecognizeFacesJob implements Job {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String result = restTemplate.getForObject(fbUserInfoURL, String.class, vars);
-		System.out.println("here's your result: " + result);
+		System.out.println("FB user data: " + result);
 		
 		JsonNode rootNode = mapper.readValue(result, JsonNode.class);
 		return rootNode.get("name").getTextValue();		

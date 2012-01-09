@@ -20,8 +20,11 @@ public class TrainFaces {
 	
 	public static final String JEFFID = "1224055@facebook.com";
 	public static final String DEREKID = "517172868@facebook.com";
+	public static final String RAHULID = "1906866@facebook.com";
+	public static final String EDITHID = "1333170033@facebook.com";
+	public static final String CURTISID = "1241032@facebook.com";
 	
-	public static final String desiredUserIds = JEFFID + "," + DEREKID; 
+	public static final String desiredUserIds = JEFFID + "," + DEREKID + "," + RAHULID + "," + EDITHID + "," + CURTISID; 
 			
 	public static final String callbackUrl = "http://gentle-samurai-2258.herokuapp.com/";
 		
@@ -69,7 +72,7 @@ public class TrainFaces {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String result = restTemplate.getForObject(faceDotComTrainURL, String.class, vars);
-		System.out.println("here's your result: " + result);
+		System.out.println("Faces Trained. Response: " + result);
 	}
 	
 	public String recognizeFaces(String photoUrl) throws IOException {
@@ -84,7 +87,7 @@ public class TrainFaces {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String result = restTemplate.getForObject(faceDotComRecognizeURL, String.class, vars);
-		System.out.println("here's your result: " + result);
+		System.out.println("Faces Recognized. Response: " + result);
 		return result;
 	}
 	

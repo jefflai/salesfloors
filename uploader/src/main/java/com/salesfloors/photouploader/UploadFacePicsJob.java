@@ -20,7 +20,7 @@ import com.salesfloors.aws.AwsClient;
 
 public class UploadFacePicsJob implements Job {
 
-	public static final String photoDirName = "/Users/jeffrey.lai/automator-photos";
+	public static final String photoDirName = "/Users/dtia/Pictures/Automator Photos";
 	public AwsClient aws = null;
 	
 	/**
@@ -29,9 +29,11 @@ public class UploadFacePicsJob implements Job {
 	 * @throws InterruptedException 
 	 * @throws AmazonClientException 
 	 * @throws AmazonServiceException 
+	 * @throws JobExecutionException 
 	 */
-	public static void main(String[] args) throws IOException, AmazonServiceException, AmazonClientException, InterruptedException {
-				
+	public static void main(String[] args) throws IOException, AmazonServiceException, AmazonClientException, InterruptedException, JobExecutionException {
+		UploadFacePicsJob job = new UploadFacePicsJob();
+		job.execute(null);
 	}
 
 	public UploadFacePicsJob() throws IOException {
