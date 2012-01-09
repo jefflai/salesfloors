@@ -35,7 +35,7 @@ public class ReadPhotosAndRecognizeFacesJob implements Job {
 
 	public static final String baseFacePhotoBucketUri = "https://s3.amazonaws.com/FacePics/";
 	public static final String fbUserInfoURL = "https://graph.facebook.com/{userId}";
-	public static final int confidenceThreshold = 50;
+	public static final int confidenceThreshold = 10;
 	
 	public AwsClient aws;
 	public ObjectMapper mapper;	

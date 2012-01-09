@@ -18,13 +18,7 @@ public class TrainFaces {
 	public static final String faceDotComApiKey = "eed2f515182570f4617551a8a7827188"; 
 	public static final String faceDotComApiSecret = "de832406e48d700fd97956f98f800153"; 
 	
-	public static final String JEFFID = "1224055@facebook.com";
-	public static final String DEREKID = "517172868@facebook.com";
-	public static final String RAHULID = "1906866@facebook.com";
-	public static final String EDITHID = "1333170033@facebook.com";
-	public static final String CURTISID = "1241032@facebook.com";
-	
-	public static final String desiredUserIds = JEFFID + "," + DEREKID + "," + RAHULID + "," + EDITHID + "," + CURTISID; 
+	public static String desiredUserIds; 
 			
 	public static final String callbackUrl = "http://gentle-samurai-2258.herokuapp.com/";
 		
@@ -33,6 +27,7 @@ public class TrainFaces {
 	
 	public static final String faceDotComTrainURL = "http://api.face.com/faces/train.json?api_key={apiKey}&api_secret={apiSecret}&uids={userIds}&namespace={nameSpace}&user_auth={userAuth}&callback_url={callbackUrl}";
 	public static final String faceDotComRecognizeURL = "http://api.face.com/faces/recognize.json?api_key={apiKey}&api_secret={apiSecret}&urls={photoUrl}&uids={userIds}&namespace=facebook.com&detector=Normal&attributes=all&user_auth={userAuth}";
+	public static final String faceDotComStatus = "http://api.face.com/faces/status.json?api_key={apiKey}&api_secret={apiSecret}&uids={userIds}&namespace=facebook.com&user_auth={userAuth}";
 	
 	public static final String fbClientId = "224434960966812";
 	public static final String fbRedirectUri = "http://gentle-samurai-2258.herokuapp.com/faces/fb_oauth";
@@ -44,6 +39,7 @@ public class TrainFaces {
 	public TrainFaces() throws IOException {
 		String oauthToken = getFbOauth();
 		userAuth = "fb_user:517172868,fb_oauth_token:" + oauthToken;
+		desiredUserIds = getFaceSubjects();
 	}
 	
 	public String getFbOauth() throws IOException {
@@ -83,13 +79,39 @@ public class TrainFaces {
 		vars.put("userIds", desiredUserIds);
 		vars.put("userAuth", userAuth);
 		
-		trainFaces();
+		trainFace(desiredUserIds);
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String result = restTemplate.getForObject(faceDotComRecognizeURL, String.class, vars);
 		System.out.println("Faces Recognized. Response: " + result);
 		return result;
 	}
+	
+	public String faceStatus() throws IOException {
+		Map<String,String> vars = new HashMap<String,String>();
+		vars.put("apiKey", faceDotComApiKey);
+		vars.put("apiSecret", faceDotComApiSecret);
+		vars.put("userIds", desiredUserIds);
+		vars.put("userAuth", userAuth);
+				
+		RestTemplate restTemplate = new RestTemplate();
+		String result = restTemplate.getForObject(faceDotComStatus, String.class, vars);
+		System.out.println("Faces Status. Response: " + result);
+		return result;
+	}
+	
+	public String getFaceSubjects() {
+		StringBuilder sb = new StringBuilder();
+		for(FaceSubject f : FaceSubject.values()) {
+			sb.append(f.getFbId());
+			sb.append(",");
+		}
+		sb.deleteCharAt(sb.length()-1);
+		
+		return sb.toString();
+	}
+	
+	
 	
 	/**
 	 * @param args
@@ -98,20 +120,11 @@ public class TrainFaces {
 	public static void main(String[] args) throws IOException {
 		// only call this when training user id's
 		
-		TrainFaces tf = new TrainFaces();
-		tf.trainFace(JEFFID);
+		//TrainFaces tf = new TrainFaces();
+		//tf.trainFaces();
+		//tf.faceStatus();
 		
 		// for recognition
 		// tf.recognizeFaces("https://s3.amazonaws.com/FacePics/CustomerPhoto.tiff");
 	}
-	
-	private void trainFaces() throws IOException {
-		TrainFaces tf = new TrainFaces();
-		String[] fbIds = new String[] {TrainFaces.JEFFID, TrainFaces.DEREKID};
-		for (String id : fbIds) {
-			tf.trainFace(id);
-		}
-		
-	}
-
 }
