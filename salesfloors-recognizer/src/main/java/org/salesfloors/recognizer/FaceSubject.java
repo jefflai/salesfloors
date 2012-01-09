@@ -2,8 +2,7 @@ package org.salesfloors.recognizer;
 
 public enum FaceSubject {
 	JEFF("1224055@facebook.com"),
-	DEREK("517172868@facebook.com"),
-	RAHUL("1906866@facebook.com"),
+	DEREK("517172868@facebook.com"),	
 	ELAINA("730592586@facebook.com")
 	;
 	
