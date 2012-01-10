@@ -32,7 +32,7 @@ public class TrainFaces {
 	public static final String fbClientId = "224434960966812";
 	public static final String fbRedirectUri = "http://gentle-samurai-2258.herokuapp.com/faces/fb_oauth";
 	
-	public static final String facebookAuthURL = "https://www.facebook.com/dialog/oauth?client_id={fbClientId}&redirect_uri={fbRedirectUri}&response_type=token"; 
+	public static final String facebookAuthURL = "https://www.facebook.com/dialog/oauth?client_id={fbClientId}&redirect_uri={fbRedirectUri}&response_type=token&scope=user_photos,friends_photos,user_photo_video_tags,friends_photo_video_tags,user_birthday,friends_birthday"; 
 	
 	private AwsClient aws;
 	
@@ -120,9 +120,9 @@ public class TrainFaces {
 	public static void main(String[] args) throws IOException {
 		// only call this when training user id's
 		
-		//TrainFaces tf = new TrainFaces();
+		TrainFaces tf = new TrainFaces();
 		//tf.trainFaces();
-		//tf.faceStatus();
+		tf.faceStatus();
 		
 		// for recognition
 		// tf.recognizeFaces("https://s3.amazonaws.com/FacePics/CustomerPhoto.tiff");

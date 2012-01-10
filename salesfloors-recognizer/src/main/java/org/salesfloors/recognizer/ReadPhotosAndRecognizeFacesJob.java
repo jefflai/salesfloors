@@ -35,7 +35,7 @@ public class ReadPhotosAndRecognizeFacesJob implements Job {
 
 	public static final String baseFacePhotoBucketUri = "https://s3.amazonaws.com/FacePics/";
 	public static final String fbUserInfoURL = "https://graph.facebook.com/{userId}";
-	public static final int confidenceThreshold = 10;
+	public static final int confidenceThreshold = 20;
 	
 	public AwsClient aws;
 	public ObjectMapper mapper;	
@@ -78,7 +78,7 @@ public class ReadPhotosAndRecognizeFacesJob implements Job {
 				JsonNode tagsNode = firstPath.get("tags");				
 				JsonNode uidsNode = tagsNode.path(0).get("uids");
 				
-				if (uidsNode.size() > 0) {
+				if (uidsNode != null && uidsNode.size() > 0) {
 					JsonNode firstUidNode = uidsNode.path(0);
 					uid = firstUidNode.get("uid").getTextValue();
 					confidence = firstUidNode.get("confidence").getIntValue();
